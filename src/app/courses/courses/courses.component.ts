@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Course } from '../model/course';
 
 @Component({
   selector: 'app-courses',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesComponent implements OnInit {
 
-  constructor() { }
+  courses: Course[] = [{id: '1231231233456871 ', name: 'Angular      ', category: ' front-end   '},
+  {id: '1231231233456871  ', name: 'Angular      ', category: 'front-end  '}];
+
+  displayedColumns = ['id' ,'name', 'category'];
+
+  constructor() {
+    //this.courses=  [];
+  }
 
   ngOnInit(): void {
   }
