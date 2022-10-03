@@ -1,9 +1,10 @@
-import { CoursesService } from './../services/courses.service';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { catchError, Observable, of } from 'rxjs';
+import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 
 import { Course } from '../model/course';
-import { tick } from '@angular/core/testing';
-import { Observable } from 'rxjs';
+import { CoursesService } from './../services/courses.service';
 
 @Component({
   selector: 'app-courses',
@@ -17,13 +18,27 @@ export class CoursesComponent implements OnInit {
   displayedColumns = ['id' ,'name', 'category'];
 
 
-  constructor(private courseService: CoursesService) {
+  constructor(private courseService: CoursesService,
+    public dialog: MatDialog
+    ) {
     //this.courses=  [];
     //this.courseService = new CoursesService();
-    this.courses$ = this.courseService.list();
+    this.courses$ = this.courseService.list()
+    .pipe(
+      catchError(error =>{
+        this.onError('Erro ao acessar cursos!');
+        return of([])
+      })
+    );
+
 
   }
-
+  onError(ErrorMsg: string) {
+    this.dialog.open(ErrorDialogComponent, {
+      data:
+        ErrorMsg
+    });
+  }
   ngOnInit(): void {
 
   }
