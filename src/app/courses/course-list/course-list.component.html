@@ -1,0 +1,49 @@
+<mat-table [dataSource]="courses">
+
+  <!--- Note that these columns can be defined in any order.
+    The actual rendered columns are set as a property on the row definition" -->
+
+
+  <!-- ID Column -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> Identificador </mat-header-cell>
+    <mat-cell *matCellDef="let course"> {{ course.id }} </mat-cell>
+  </ng-container>
+
+  <!-- name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Curso </mat-header-cell>
+    <mat-cell *matCellDef="let course"> {{ course.name }} </mat-cell>
+  </ng-container>
+
+  <!-- Categoria Column -->
+  <ng-container matColumnDef="category">
+    <mat-header-cell *matHeaderCellDef> Categoria </mat-header-cell>
+    <mat-cell *matCellDef="let course"> {{ course.category }} </mat-cell>
+  </ng-container>
+
+  <!-- add item Column  buttom off adition course-->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef class="action-column-header">
+      <button mat-mini-fab color="accent" aria-label="Adicionar Curso">
+        <mat-icon (click)="onAdd()"> add_circle </mat-icon>
+      </button>
+    </mat-header-cell>
+
+    <!-- update item Column  buttom off apdate course-->
+    <mat-cell *matCellDef="let course" class="action-column">
+      <button mat-icon-button color="primary" aria-label="Editar Curso">
+        <mat-icon> edit </mat-icon>
+      </button>
+
+      <!-- remove item Column  buttom off remove course-->
+      <button mat-icon-button color="warn" aria-label="Remover Curso">
+        <mat-icon> delete </mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
