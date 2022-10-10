@@ -5,24 +5,21 @@ import { delay, first, tap } from 'rxjs';
 import { Course } from './../model/course';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CoursesService {
+  private readonly API = 'api/courses';
 
-  private readonly API= 'api/courses';
+  constructor(private httpClient: HttpClient) {}
 
-  constructor(
-    private httpClient: HttpClient) { }
-
-  list(){
+  list() {
     return this.httpClient.get<Course[]>(this.API).pipe(
       first(),
       delay(5000),
-      tap(courses => console.log(courses))
+      tap((courses) => console.log(courses))
     );
   }
-  save(course: Course){
-   return this.httpClient.post<Course>(this.API, course)
-   .pipe(first());
+  save(course: Partial<Course>) {
+    return this.httpClient.post<Course>(this.API, course).pipe(first());
   }
 }
