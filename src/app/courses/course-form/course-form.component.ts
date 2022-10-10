@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
 
@@ -11,13 +11,13 @@ import { CoursesService } from './../services/courses.service';
   styleUrls: ['./course-form.component.scss'],
 })
 export class CourseFormComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   //para usar a class select importante inicializar
   disableSelect = new FormControl(false);
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private service: CoursesService,
     private snackBar: MatSnackBar,
     private location: Location
