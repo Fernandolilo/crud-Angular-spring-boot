@@ -15,17 +15,28 @@ export class CoursesService {
   list() {
     return this.httpClient.get<Course[]>(this.API).pipe(
       first(),
-      delay(5000),
-      tap((courses) => console.log(courses))
+      delay(5000)
+      //tap((courses) => console.log(courses))
     );
   }
 
   save(course: Partial<Course>) {
-    return this.httpClient.post<Course>(this.API, course).pipe(first());
+    console.log(course);
+    if (course.id) {
+      return this.update(course);
+    }
+    return this.create(course);
   }
 
-  findById(id: string){
+  findById(id: string) {
     return this.httpClient.get<Course>(`${this.API}/${id}`);
   }
 
+  private create(course: Partial<Course>) {
+    return this.httpClient.post<Course>(this.API, course).pipe(first());
+  }
+
+  private update(course: Partial<Course>) {
+    return this.httpClient.put<Course>(`${this.API}/${course.id}`, course);
+  }
 }
