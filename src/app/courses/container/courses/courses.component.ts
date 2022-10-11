@@ -59,5 +59,8 @@ export class CoursesComponent implements OnInit {
     this.route.navigate(['edit', course.id], {relativeTo: this.activationRoute});
   }
 
+  onDelete(course: Course){
+    this.route.navigate(['delete', course.id], {relativeTo: this.activationRoute});
+  }
 
 }

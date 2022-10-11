@@ -20,8 +20,13 @@
     </form>
   </mat-card-content>
 
-  <mat-card-actions>
+
+  <mat-card-actions >
     <button mat-raised-button color="primary" (click)="onSubmit()">Salvar</button>
     <button mat-raised-button (click)="onCancel()">Cancelar</button>
+    <button  mat-raised-button color="warn" (click)="onDelete(courses)">Deletar</button>
+
+
   </mat-card-actions>
+
 </mat-card>

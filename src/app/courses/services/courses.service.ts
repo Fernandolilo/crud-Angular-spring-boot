@@ -1,6 +1,7 @@
+import { catchError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { delay, first, tap } from 'rxjs';
+import { delay, first, tap, Observable } from 'rxjs';
 
 import { Course } from './../model/course';
 
@@ -21,7 +22,6 @@ export class CoursesService {
   }
 
   save(course: Partial<Course>) {
-    console.log(course);
     if (course.id) {
       return this.update(course);
     }
@@ -38,5 +38,9 @@ export class CoursesService {
 
   private update(course: Partial<Course>) {
     return this.httpClient.put<Course>(`${this.API}/${course.id}`, course);
+  }
+
+  delete(id: string){
+    return this.httpClient.delete<Course>(`${this.API}/${id}`);
   }
 }

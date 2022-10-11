@@ -1,9 +1,10 @@
+import { Course } from './../../model/course';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, NonNullableFormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { Course } from '../../model/course';
+
 
 import { CoursesService } from '../../services/courses.service';
 
@@ -22,6 +23,7 @@ export class CourseFormComponent implements OnInit {
 
   //para usar a class select importante inicializar
   disableSelect = new FormControl(false);
+  courses: any;
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
@@ -61,4 +63,11 @@ export class CourseFormComponent implements OnInit {
     this.snackBar.open('Salvo com Sucesso!', '', { duration: 1500 });
     this.location.back();
   }
+
+  onDelete(course: Course): void{
+    console.log("DELETADO")
+    this.service.delete(course.id)
+      this.snackBar.open('Deletado com Sucesso!', '', { duration: 1500 });
+      this.location.back();
+    }
 }
